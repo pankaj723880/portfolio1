@@ -1,0 +1,1547 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pankaj Kumar Singh - Personal Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Smooth scrolling for the whole page */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Basic body styling with custom font, background, and text color */
+        body {
+            font-family: "Inter", sans-serif;
+            background-color: #f0f9ff;
+            color: #1f2937;
+        }
+
+        /* Custom scrollbar styling for a cleaner look in WebKit browsers */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #e0f2f7;
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #06b6d4;
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #0ea5e9;
+        }
+
+        /* Hero section background with a dynamic gradient animation */
+        .hero-bg {
+            background: linear-gradient(135deg, #1e3a8a 0%, #06b6d4 100%);
+            animation: newGradientAnimation 12s ease infinite alternate;
+        }
+
+        /* Keyframe animation for the hero section background gradient */
+        @keyframes newGradientAnimation {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            100% {
+                background-position: 100% 50%;
+            }
+        }
+
+        /* Primary button styling with hover effects */
+        .btn-primary {
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out, background-color 0.2s ease-in-out;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25);
+        }
+
+        /* Project card styling with a lift-up hover effect */
+        .project-card {
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            border: 1px solid #e2e8f0;
+        }
+
+        .project-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.18);
+        }
+
+        /* Skill bar fill animation for visual progress indication */
+        .skill-bar-fill {
+            transition: width 1s ease-out;
+        }
+
+        /* Loading spinner animation */
+        .spinner {
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            border-left-color: #06b6d4;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            animation: spin 1s linear infinite;
+        }
+
+        /* Keyframe animation for the loading spinner rotation */
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Modal overlay for dimmed background when a modal is active */
+        .modal-overlay {
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 999;
+        }
+
+        /* Modal content styling with scrollability and rounded corners */
+        .modal-content {
+            max-height: 90vh;
+            overflow-y: auto;
+            border-radius: 1rem;
+        }
+
+        /* Hide scrollbar for modal content in WebKit browsers */
+        .modal-content::-webkit-scrollbar {
+            width: 0;
+            background: transparent;
+        }
+
+        /* Hide scrollbar for modal content in IE, Edge, and Firefox */
+        .modal-content {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        /* AI-powered feature button styling */
+        .btn-ai {
+            background-color: #06b6d4;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 9999px;
+            font-weight: 600;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.2s ease-in-out, transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        }
+
+        .btn-ai:hover {
+            background-color: #0ea5e9;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .btn-ai:disabled {
+            background-color: #a78bfa;
+            cursor: not-allowed;
+            box-shadow: none;
+            transform: none;
+        }
+
+        /* Social icon hover effect */
+        .social-icon:hover {
+            color: #06b6d4;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="bg-white shadow-lg fixed top-0 left-0 w-full z-50">
+        <nav class="container mx-auto px-6 py-4 flex items-center justify-between">
+            <div class="text-2xl font-extrabold text-gray-900">
+                <a href="#home" class="hover:text-cyan-600 transition duration-300">Pankaj Kumar Singh</a>
+            </div>
+            <div class="md:hidden">
+                <button id="mobile-menu-button"
+                    class="text-gray-600 hover:text-gray-800 focus:outline-none focus:text-gray-800">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+            <ul id="desktop-menu" class="hidden md:flex space-x-8">
+                <li><a href="#home"
+                        class="text-gray-700 hover:text-cyan-600 transition duration-300 font-medium">Home</a></li>
+                <li><a href="#about"
+                        class="text-gray-700 hover:text-cyan-600 transition duration-300 font-medium">About</a></li>
+                <li><a href="#project"
+                        class="text-gray-700 hover:text-cyan-600 transition duration-300 font-medium">Project</a></li>
+                <li><a href="#skills"
+                        class="text-gray-700 hover:text-cyan-600 transition duration-300 font-medium">Skills</a></li>
+                <li><a href="#services"
+                        class="text-gray-700 hover:text-cyan-600 transition duration-300 font-medium">Services</a></li>
+                <li><a href="#blog"
+                        class="text-gray-700 hover:text-cyan-600 transition duration-300 font-medium">Blog</a></li>
+                <li><a href="#testimonials"
+                        class="text-gray-700 hover:text-cyan-600 transition duration-300 font-medium">Testimonials</a>
+                </li>
+                <li><a href="#contact"
+                        class="text-gray-700 hover:text-cyan-600 transition duration-300 font-medium">Contact</a></li>
+                <li><a href="#My_Resume" id="Resume"
+                        class="text-gray-700 hover:text-cyan-600 transition duration-300 font-medium">Resume</a></li>
+            </ul>
+        </nav>
+        <ul id="mobile-menu" class="md:hidden bg-white shadow-lg py-4 px-6 space-y-4 hidden">
+            <li><a href="#home"
+                    class="block text-gray-700 hover:text-cyan-600 transition duration-300 font-medium">Home</a></li>
+            <li><a href="#about"
+                    class="block text-gray-700 hover:text-cyan-600 transition duration-300 font-medium">About</a></li>
+            <li><a href="#project"
+                    class="block text-gray-700 hover:text-cyan-600 transition duration-300 font-medium">Project</a>
+            </li>
+            <li><a href="#skills"
+                    class="block text-gray-700 hover:text-cyan-600 transition duration-300 font-medium">Skills</a></li>
+            <li><a href="#services"
+                    class="block text-gray-700 hover:text-cyan-600 transition duration-300 font-medium">Services</a>
+            </li>
+            <li><a href="#blog"
+                    class="block text-gray-700 hover:text-cyan-600 transition duration-300 font-medium">Blog</a></li>
+            <li><a href="#testimonials"
+                    class="block text-gray-700 hover:text-cyan-600 transition duration-300 font-medium">Testimonials</a>
+            </li>
+            <li><a href="#contact"
+                    class="block text-gray-700 hover:text-cyan-600 transition duration-300 font-medium">Contact</a></li>
+            <li><a href="My_Resume" id="mobile-resume-link"
+                    class="block text-gray-700 hover:text-cyan-600 transition duration-300 font-medium">Resume</a>
+            </li>
+        </ul>
+    </header>
+
+    <main class="pt-20">
+        <section id="home" class="hero-bg min-h-screen flex items-center justify-center text-white py-16 px-4">
+            <div class="container mx-auto text-center md:text-left">
+                <div
+                    class="flex flex-col-reverse md:flex-row items-center justify-center md:justify-between md:space-x-12">
+                    <div class="mt-8 md:mt-0 md:w-1/2">
+                        <h1 class="text-5xl md:text-6xl font-extrabold leading-tight mb-4 rounded-lg p-2">
+                            Hello, I'm <span class="text-amber-300">Pankaj Kumar Singh</span>
+                        </h1>
+                        <p class="text-xl md:text-2xl mb-8 max-w-2xl">
+                            I am a <span class="font-semibold">Web Developer.</span> I love building user-friendly web
+                            applications and continuously exploring new technologies to grow as a developer.
+                        </p>
+                        <div
+                            class="flex flex-col sm:flex-row justify-center md:justify-start space-y-4 sm:space-y-0 sm:space-x-6">
+                            <a href="#project"
+                                class="btn-primary bg-white text-blue-800 px-8 py-3 rounded-full text-lg font-semibold shadow-lg hover:bg-gray-100 hover:text-blue-900">
+                                View My Work
+                            </a>
+                            <a href="#contact"
+                                class="btn-primary bg-orange-500 text-white px-8 py-3 rounded-full text-lg font-semibold shadow-lg hover:bg-orange-600 border border-white">
+                                Get in Touch
+                            </a>
+                        </div>
+                    </div>
+                    <div class="md:w-1/2 flex justify-center md:justify-end">
+                        <img src="img.jpg" alt="Your Photo"
+                            class="rounded-full w-64 h-64 object-cover border-4 border-white shadow-xl">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="py-16 px-4 bg-blue-50">
+            <div class="container mx-auto max-w-4xl">
+                <h2 class="text-4xl font-bold text-center mb-12 text-blue-900">About Me</h2>
+                <div class="bg-white p-8 rounded-xl shadow-lg border border-blue-100">
+                    <p id="about-me-text" class="text-lg leading-relaxed mb-6 text-gray-700">
+                        Hi, I'm Pankaj Kumar Singh, a passionate Full Stack Developer with experience in building
+                        dynamic and responsive web applications using HTML, CSS, JavaScript, Python, and MySQL.
+
+                        I love creating clean, user-friendly interfaces and solving real-world problems through code.
+                        I’ve worked on several academic and personal projects, including an Online Voting System, a
+                        Hotel Booking App, and a Netflix Clone.
+
+                        I’m constantly learning and enjoy taking on new challenges that push my skills forward. My
+                        current focus is on building full-stack applications and improving user experience through
+                        modern web technologies.
+
+                        Outside of coding, I enjoy singing, playing chess, and photography. I'm currently looking for
+                        opportunities where I can contribute to impactful projects and grow as a developer.
+                    </p>
+                    <div
+                        class="mt-8 text-center flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
+                        <button id="expand-about-me-btn" class="btn-ai flex items-center justify-center">
+                            <span id="expand-about-spinner" class="hidden spinner mr-2"></span>
+                            Expand About Me ✨
+                        </button>
+                        <button id="summarize-about-me-btn" class="btn-ai flex items-center justify-center">
+                            <span id="summarize-about-spinner" class="hidden spinner mr-2"></span>
+                            Summarize About Me ✨
+                        </button>
+                        <a href="Resume.pdf" target="_blank" id="My_Resume"
+                            class="btn-primary bg-gray-700 text-white px-6 py-3 rounded-full text-md font-semibold shadow-md hover:bg-gray-800 flex items-center justify-center">
+                            Download My Resume
+                        </a>
+                    </div>
+                    <p id="about-me-error-message" class="text-red-500 mt-4 text-center hidden"></p>
+                </div>
+            </div>
+        </section>
+
+        <section id="project" class="py-16 px-4 bg-white">
+            <div class="container mx-auto">
+                <h2 class="text-4xl font-bold text-center mb-12 text-blue-900">My Project</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="project-card bg-blue-50 rounded-xl shadow-md overflow-hidden cursor-pointer"
+                        data-project-id="1">
+                        <img src="foody.png" alt="Project 1" class="w-full h-48 object-cover">
+                        <div class="p-6">
+                            <h3 class="text-2xl font-semibold mb-2 text-blue-800">Landing page of food delivery platform
+                            </h3>
+                            <p class="text-gray-700">Created and designed a various page for a Food Delivery
+                                Website.</p>
+                            <div class="mt-4 flex flex-wrap gap-2">
+                                <span
+                                    class="bg-cyan-100 text-cyan-800 text-xs font-medium px-2.5 py-0.5 rounded-full">HTML
+                                </span>
+                                <span
+                                    class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded-full">CSS</span>
+                                <span
+                                    class="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded-full">Javascript</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-card bg-blue-50 rounded-xl shadow-md overflow-hidden cursor-pointer"
+                        data-project-id="2">
+                        <img src="netflix.png" alt="Project 2" class="w-full h-48 object-cover">
+                        <div class="p-6">
+                            <h3 class="text-2xl font-semibold mb-2 text-blue-800">Netflix Clone</h3>
+                            <p class="text-gray-700">Designing an intuitive Netflix clone connecting users with
+                                platform.</p>
+                            <div class="mt-4 flex flex-wrap gap-2">
+                                <span
+                                    class="bg-cyan-100 text-cyan-800 text-xs font-medium px-2.5 py-0.5 rounded-full">HTML,CSS,Javascript
+                                </span>
+                                <span
+                                    class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded-full">Bootstrap</span>
+                                <span
+                                    class="bg-yellow-100 text-yellow-800 text-xs font-medium px-2.5 py-0.5 rounded-full">React.js</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-card bg-blue-50 rounded-xl shadow-md overflow-hidden cursor-pointer"
+                        data-project-id="3">
+                        <img src="voting.png" alt="Project 3" class="w-full h-48 object-cover">
+                        <div class="p-6">
+                            <h3 class="text-2xl font-semibold mb-2 text-blue-800">Online Voting System</h3>
+                            <p class="text-gray-700">Conducting a comprehensive UX audit and proposing improvements for
+                                an online store.</p>
+                            <div class="mt-4 flex flex-wrap gap-2">
+                                <span
+                                    class="bg-cyan-100 text-cyan-800 text-xs font-medium px-2.5 py-0.5 rounded-full">Python</span>
+                                <span
+                                    class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded-full">MYSQL</span>
+                                <span
+                                    class="bg-red-100 text-red-800 text-xs font-medium px-2.5 py-0.5 rounded-full">Database</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-card bg-blue-50 rounded-xl shadow-md overflow-hidden cursor-pointer"
+                        data-project-id="4">
+                        <img src="chatbot.png" alt="Project 4" class="w-full h-48 object-cover">
+                        <div class="p-6">
+                            <h3 class="text-2xl font-semibold mb-2 text-blue-800">Ai Chatbot</h3>
+                            <p class="text-gray-700">A responsive AI chatbot built using HTML, CSS, JavaScript, and OpenRouter API for real-time intelligent conversations.</p>
+                            <div class="mt-4 flex flex-wrap gap-2">
+                                <span
+                                    class="bg-cyan-100 text-cyan-800 text-xs font-medium px-2.5 py-0.5 rounded-full">Html and Css</span>
+                                <span
+                                    class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded-full">Javascript</span>
+                                <span
+                                    class="bg-red-100 text-red-800 text-xs font-medium px-2.5 py-0.5 rounded-full">API Key</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+        </section>
+
+        <section id="skills" class="py-16 px-4 bg-blue-50">
+            <div class="container mx-auto max-w-4xl">
+                <h2 class="text-4xl font-bold text-center mb-12 text-blue-900">My Skills</h2>
+                <div class="bg-white p-8 rounded-xl shadow-lg border border-blue-100">
+                    <div class="mb-8">
+                        <h3 class="text-2xl font-semibold mb-4 text-blue-800">Backend Development</h3>
+                        <div class="space-y-4">
+                            <div class="flex items-center">
+                                <span class="w-32 text-gray-700 font-medium">Python</span>
+                                <div class="flex-1 bg-gray-200 rounded-full h-3">
+                                    <div class="skill-bar-fill bg-cyan-600 h-full rounded-full" style="width: 75%;">
+                                    </div>
+                                </div>
+                                <button
+                                    class="generate-skill-desc-btn ml-4 text-cyan-600 hover:text-cyan-800 focus:outline-none"
+                                    data-skill="Python">
+                                    <i class="fas fa-magic"></i>
+                                </button>
+                            </div>
+                            <p class="skill-description text-sm text-gray-600 mt-2 ml-36 hidden"></p>
+                            <div class="flex items-center">
+                                <span class="w-32 text-gray-700 font-medium">Node.js</span>
+                                <div class="flex-1 bg-gray-200 rounded-full h-3">
+                                    <div class="skill-bar-fill bg-cyan-600 h-full rounded-full" style="width: 60%;">
+                                    </div>
+                                </div>
+                                <button
+                                    class="generate-skill-desc-btn ml-4 text-cyan-600 hover:text-cyan-800 focus:outline-none"
+                                    data-skill="Node.js">
+                                    <i class="fas fa-magic"></i>
+                                </button>
+                            </div>
+                            <p class="skill-description text-sm text-gray-600 mt-2 ml-36 hidden"></p>
+                            <div class="flex items-center">
+                                <span class="w-32 text-gray-700 font-medium">MYSQL</span>
+                                <div class="flex-1 bg-gray-200 rounded-full h-3">
+                                    <div class="skill-bar-fill bg-cyan-600 h-full rounded-full" style="width: 80%;">
+                                    </div>
+                                </div>
+                                <button
+                                    class="generate-skill-desc-btn ml-4 text-cyan-600 hover:text-cyan-800 focus:outline-none"
+                                    data-skill="MYSQL">
+                                    <i class="fas fa-magic"></i>
+                                </button>
+                            </div>
+                            <p class="skill-description text-sm text-gray-600 mt-2 ml-36 hidden"></p>
+                            <div class="flex items-center">
+                                <span class="w-32 text-gray-700 font-medium">Java Basics</span>
+                                <div class="flex-1 bg-gray-200 rounded-full h-3">
+                                    <div class="skill-bar-fill bg-cyan-600 h-full rounded-full" style="width: 60%;">
+                                    </div>
+                                </div>
+                                <button
+                                    class="generate-skill-desc-btn ml-4 text-cyan-600 hover:text-cyan-800 focus:outline-none"
+                                    data-skill="Java Basics">
+                                    <i class="fas fa-magic"></i>
+                                </button>
+                            </div>
+                            <p class="skill-description text-sm text-gray-600 mt-2 ml-36 hidden"></p>
+                        </div>
+                    </div>
+
+                    <div class="mb-8">
+                        <h3 class="text-2xl font-semibold mb-4 text-blue-800">Development (Basic)</h3>
+                        <div class="space-y-4">
+                            <div class="flex items-center">
+                                <span class="w-32 text-gray-700 font-medium">HTML/CSS</span>
+                                <div class="flex-1 bg-gray-200 rounded-full h-3">
+                                    <div class="skill-bar-fill bg-cyan-600 h-full rounded-full" style="width: 85%;">
+                                    </div>
+                                </div>
+                                <button
+                                    class="generate-skill-desc-btn ml-4 text-cyan-600 hover:text-cyan-800 focus:outline-none"
+                                    data-skill="HTML/CSS">
+                                    <i class="fas fa-magic"></i>
+                                </button>
+                            </div>
+                            <p class="skill-description text-sm text-gray-600 mt-2 ml-36 hidden"></p>
+                            <div class="flex items-center">
+                                <span class="w-32 text-gray-700 font-medium">JavaScript</span>
+                                <div class="flex-1 bg-gray-200 rounded-full h-3">
+                                    <div class="skill-bar-fill bg-cyan-600 h-full rounded-full" style="width: 75%;">
+                                    </div>
+                                </div>
+                                <button
+                                    class="generate-skill-desc-btn ml-4 text-cyan-600 hover:text-cyan-800 focus:outline-none"
+                                    data-skill="JavaScript">
+                                    <i class="fas fa-magic"></i>
+                                </button>
+                            </div>
+                            <p class="skill-description text-sm text-gray-600 mt-2 ml-36 hidden"></p>
+                            <div class="flex items-center">
+                                <span class="w-32 text-gray-700 font-medium">React (Basics)</span>
+                                <div class="flex-1 bg-gray-200 rounded-full h-3">
+                                    <div class="skill-bar-fill bg-cyan-600 h-full rounded-full" style="width: 60%;">
+                                    </div>
+                                </div>
+                                <button
+                                    class="generate-skill-desc-btn ml-4 text-cyan-600 hover:text-cyan-800 focus:outline-none"
+                                    data-skill="React (Basics)">
+                                    <i class="fas fa-magic"></i>
+                                </button>
+                            </div>
+                            <p class="skill-description text-sm text-gray-600 mt-2 ml-36 hidden"></p>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 class="text-2xl font-sem to ibold mb-4 text-blue-800">Other Skills</h3>
+                        <div class="flex flex-wrap gap-4">
+                            <span class="bg-gray-200 text-gray-700 px-4 py-2 rounded-full font-medium shadow-sm">Problem
+                                Solving</span>
+                            <span
+                                class="bg-gray-200 text-gray-700 px-4 py-2 rounded-full font-medium shadow-sm">Communication</span>
+                            <span class="bg-gray-200 text-gray-700 px-4 py-2 rounded-full font-medium shadow-sm">Team
+                                Collaboration</span>
+                            <span class="bg-gray-200 text-gray-700 px-4 py-2 rounded-full font-medium shadow-sm">Agile
+                                Methodologies</span>
+                            <span class="bg-gray-200 text-gray-700 px-4 py-2 rounded-full font-medium shadow-sm">SEO
+                                Basics</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="services" class="py-16 px-4 bg-white">
+            <div class="container mx-auto max-w-4xl">
+                <h2 class="text-4xl font-bold text-center mb-12 text-blue-900">My Services</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="service-card bg-blue-50 p-8 rounded-xl shadow-lg text-center border border-blue-100">
+                        <i class="fas fa-palette text-5xl text-cyan-600 mb-4"></i>
+                        <h3 class="text-2xl font-semibold mb-4 text-blue-800">Website Development</h3>
+                        <p class="text-gray-700 leading-relaxed service-description-text">
+                            "I will create a modern, mobile-responsive website for your business, portfolio, or personal
+                            brand
+                            using HTML, CSS, and JavaScript."
+
+                        </p>
+                        <button
+                            class="generate-service-desc-btn btn-ai text-sm mt-4 flex items-center justify-center mx-auto">
+                            <span class="hidden spinner mr-2"></span>
+                            Generate Description ✨
+                        </button>
+                        <p class="service-desc-error text-red-500 mt-2 hidden"></p>
+                    </div>
+                    <div class="service-card bg-blue-50 p-8 rounded-xl shadow-lg text-center border border-blue-100">
+                        <i class="fas fa-lightbulb text-5xl text-cyan-600 mb-4"></i>
+                        <h3 class="text-2xl font-semibold mb-4 text-blue-800">Portfolio & Resume Website Creation</h3>
+                        <p class="text-gray-700 leading-relaxed service-description-text">
+                            "I will build a professional personal portfolio or resume website to showcase your skills
+                            and help
+                            you stand out."
+
+                        </p>
+                        <button
+                            class="generate-service-desc-btn btn-ai text-sm mt-4 flex items-center justify-center mx-auto">
+                            <span class="hidden spinner mr-2"></span>
+                            Generate Description ✨
+                        </button>
+                        <p class="service-desc-error text-red-500 mt-2 hidden"></p>
+                    </div>
+                    <div class="service-card bg-blue-50 p-8 rounded-xl shadow-lg text-center border border-blue-100">
+                        <i class="fas fa-code text-5xl text-cyan-600 mb-4"></i>
+                        <h3 class="text-2xl font-semibold mb-4 text-blue-800">Backend Development </h3>
+                        <p class="text-gray-700 leading-relaxed service-description-text">
+                            Providing backend best practices, server-side design, and basic, Python, and Java development.
+                        </p>
+                        <button
+                            class="generate-service-desc-btn btn-ai text-sm mt-4 flex items-center justify-center mx-auto">
+                            <span class="hidden spinner mr-2"></span>
+                            Generate Description ✨
+                        </button>
+                        <p class="service-desc-error text-red-500 mt-2 hidden"></p>
+                    </div>
+                    <div class="service-card bg-blue-50 p-8 rounded-xl shadow-lg text-center border border-blue-100">
+                        <i class="fas fa-chart-line text-5xl text-cyan-600 mb-4"></i>
+                        <h3 class="text-2xl font-semibold mb-4 text-blue-800"> Database Design & SQL Query </h3>
+                        <p class="text-gray-700 leading-relaxed service-description-text">
+                            "I will design your database schema and write efficient SQL queries for projects or
+                            academic
+                            assignments."
+
+                        </p>
+                        <button
+                            class="generate-service-desc-btn btn-ai text-sm mt-4 flex items-center justify-center mx-auto">
+                            <span class="hidden spinner mr-2"></span>
+                            Generate Description ✨
+                        </button>
+                        <p class="service-desc-error text-red-500 mt-2 hidden"></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="blog" class="py-16 px-4 bg-blue-50">
+            <div class="container mx-auto max-w-4xl">
+                <h2 class="text-4xl font-bold text-center mb-12 text-blue-900">My Blog & Insights</h2>
+                <div class="bg-white p-8 rounded-xl shadow-lg border border-blue-100">
+                    <p class="text-lg leading-relaxed mb-6 text-gray-700 text-center">
+                        Here I share my thoughts, insights, and experiences on UX/UI design, technology, and creative
+                        processes.
+                    </p>
+                    <div id="blog-posts" class="space-y-8">
+                        <div class="border-b border-blue-200 pb-6">
+                            <h3 class="text-2xl font-semibold mb-2 text-blue-800">The Power of User Research in Product
+                                Development</h3>
+                            <p class="text-gray-600 text-sm mb-3">Published on: May 28, 2025</p>
+                            <p class="text-gray-700 leading-relaxed">
+                                Understanding your users is paramount to building successful products. This post delves
+                                into
+                                various user research methodologies and how they inform design decisions...
+                            </p>
+                            <a href="#" class="text-cyan-600 hover:underline font-medium mt-2 inline-block">Read
+                                More</a>
+                        </div>
+                        <div class="border-b border-blue-200 pb-6">
+                            <h3 class="text-2xl font-semibold mb-2 text-blue-800">Designing for Accessibility: A Core
+                                Principle
+                            </h3>
+                            <p class="text-gray-600 text-sm mb-3">Published on: April 15, 2025</p>
+                            <p class="text-gray-700 leading-relaxed">
+                                Accessibility isn't just a compliance checkbox; it's about creating inclusive
+                                experiences for
+                                everyone. Learn about key accessibility principles in UI design...
+                            </p>
+                            <a href="#" class="text-cyan-600 hover:underline font-medium mt-2 inline-block">Read
+                                More</a>
+                        </div>
+                    </div>
+
+                    <div class="mt-12 bg-blue-100 p-8 rounded-xl shadow-md text-center border border-blue-200">
+                        <h3 class="text-3xl font-bold mb-4 text-blue-900">Generate a Blog Idea!</h3>
+                        <p class="text-gray-700 mb-6">Need inspiration? Ask AI to generate a blog post idea related to
+                            UX/UI
+                            design.</p>
+                        <input type="text" id="text-prompt" placeholder="e.g., 'Latest trends in mobile UX'"
+                            class="w-full md:w-2/3 p-3 rounded-lg border border-blue-300 focus:outline-none focus:ring-2 focus:ring-cyan-500 mb-4 text-gray-800">
+                        <button id="generate-text-btn" class="btn-ai flex items-center justify-center mx-auto">
+                            <span id="text-spinner" class="hidden spinner mr-2"></span>
+                            Generate Idea
+                        </button>
+                        <div id="generated-text-container" class="mt-8 hidden">
+                            <h4 class="text-xl font-semibold mb-4 text-blue-800">Generated Idea:</h4>
+                            <p id="generated-text"
+                                class="text-gray-700 leading-relaxed bg-white p-4 rounded-lg shadow-inner">
+                            </p>
+                        </div>
+                        <p id="text-error-message" class="text-red-500 mt-4 hidden"></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="testimonials" class="py-16 px-4 bg-white">
+            <div class="container mx-auto max-w-4xl">
+                <h2 class="text-4xl font-bold text-center mb-12 text-blue-900">What Clients Say</h2>
+                <div class="bg-blue-50 p-8 rounded-xl shadow-lg border border-blue-100">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8" id="testimonials-grid">
+                        <div class="bg-white p-6 rounded-lg shadow-md border-t-4 border-cyan-600">
+                            <p class="text-gray-700 italic mb-4">
+                                "Pankaj delivered exceptional UX designs for our SaaS platform. Their attention to
+                                detail and
+                                user-centric approach significantly improved our product's usability."
+                            </p>
+                            <p class="font-semibold text-blue-800">- Prabhakar, Singh CEO of Tech Solutions</p>
+                        </div>
+                        <div class="bg-white p-6 rounded-lg shadow-md border-t-4 border-cyan-600">
+                            <p class="text-gray-700 italic mb-4">
+                                "Working with Pankaj was a pleasure. They quickly grasped our complex requirements
+                                and
+                                translated them into elegant and effective UI solutions. Highly recommended!"
+                            </p>
+                            <p class="font-semibold text-blue-800">- Ashish Kumar, Product Manager at Innovate Co.</p>
+                        </div>
+                        <div class="bg-white p-6 rounded-lg shadow-md border-t-4 border-cyan-600">
+                            <p class="text-gray-700 italic mb-4">
+                                "The UX audit provided by Pankaj was incredibly insightful. Their recommendations
+                                were
+                                actionable and led to measurable improvements in our conversion rates."
+                            </p>
+                            <p class="font-semibold text-blue-800">- Suyash Singh, Marketing Director</p>
+                        </div>
+                        <div class="bg-white p-6 rounded-lg shadow-md border-t-4 border-cyan-600">
+                            <p class="text-gray-700 italic mb-4">
+                                "Pankaj's ability to combine creative flair with practical usability is truly
+                                impressive.
+                                They are a valuable asset to any project."
+                            </p>
+                            <p class="font-semibold text-blue-800">- Karan Tiwari, Startup Founder</p>
+                        </div>
+                    </div>
+
+                    <div class="mt-12 bg-blue-100 p-8 rounded-xl shadow-md text-center border border-blue-200">
+                        <h3 class="text-3xl font-bold mb-4 text-blue-900">Generate a Testimonial!</h3>
+                        <p class="text-gray-700 mb-6">Enter a short summary of feedback to generate a full testimonial.
+                        </p>
+                        <textarea id="testimonial-prompt" rows="3"
+                            class="w-full p-3 rounded-lg border border-blue-300 focus:outline-none focus:ring-2 focus:ring-cyan-500 mb-4 text-gray-800"
+                            placeholder="e.g., 'Great designer, very professional and delivered on time.'"></textarea>
+                        <input type="text" id="testimonial-author"
+                            class="w-full md:w-2/3 p-3 rounded-lg border border-blue-300 focus:outline-none focus:ring-2 focus:ring-cyan-500 mb-4 text-gray-800"
+                            placeholder="Author Name, Title (Optional)">
+                        <button id="generate-testimonial-btn" class="btn-ai flex items-center justify-center mx-auto">
+                            <span id="testimonial-spinner" class="hidden spinner mr-2"></span>
+                            Generate Testimonial ✨
+                        </button>
+                        <p id="testimonial-error-message" class="text-red-500 mt-4 hidden"></p>
+                        <div id="generated-testimonial-container"
+                            class="mt-8 hidden bg-white p-6 rounded-lg shadow-md border-t-4 border-orange-500 text-left">
+                            <h4 class="text-xl font-semibold mb-4 text-blue-800">Generated Testimonial:</h4>
+                            <p id="generated-testimonial-text" class="text-gray-700 italic mb-4"></p>
+                            <p id="generated-testimonial-author" class="font-semibold text-blue-800"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="py-16 px-4 bg-blue-50">
+            <div class="container mx-auto max-w-2xl">
+                <h2 class="text-4xl font-bold text-center mb-12 text-blue-900">Get in Touch</h2>
+                <div class="bg-white p-8 rounded-xl shadow-lg border border-blue-100">
+                    <p class="text-lg leading-relaxed mb-8 text-gray-700 text-center">
+                        Have a project in mind or just want to say hello? Feel free to reach out!
+                    </p>
+                    <form id="contact-form" class="space-y-6">
+                        <div>
+                            <label for="name" class="block text-gray-700 text-sm font-bold mb-2">Name</label>
+                            <input type="text" id="name" name="name"
+                                class="w-full px-4 py-3 rounded-lg border border-blue-300 focus:outline-none focus:ring-2 focus:ring-cyan-500 text-gray-800"
+                                placeholder="Your Name" required>
+                        </div>
+                        <div>
+                            <label for="email" class="block text-gray-700 text-sm font-bold mb-2">Email</label>
+                            <input type="email" id="email" name="email"
+                                class="w-full px-4 py-3 rounded-lg border border-blue-300 focus:outline-none focus:ring-2 focus:ring-cyan-500 text-gray-800"
+                                placeholder="your.email@example.com" required>
+                        </div>
+                        <div>
+                            <label for="message" class="block text-gray-700 text-sm font-bold mb-2">Message</label>
+                            <textarea id="message" name="message" rows="6"
+                                class="w-full px-4 py-3 rounded-lg border border-blue-300 focus:outline-none focus:ring-2 focus:ring-cyan-500 text-gray-800"
+                                placeholder="Your message..." required></textarea>
+                        </div>
+                        <div class="text-center">
+                            <button type="submit"
+                                class="btn-primary bg-orange-500 text-white px-8 py-3 rounded-full text-lg font-semibold shadow-md hover:bg-orange-600">
+                                Send Message
+                            </button>
+                        </div>
+                    </form>
+                    <div id="contact-success-message"
+                        class="hidden mt-8 bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded-lg relative"
+                        role="alert">
+                        <strong class="font-bold">Success!</strong>
+                        <span class="block sm:inline">Your message has been sent. I'll get back to you soon!</span>
+                    </div>
+                </div>
+                <div class="mt-12 text-center text-gray-700">
+                    <p class="text-xl font-semibold mb-4 text-blue-900">Connect with me on social media:</p>
+                    <div class="flex justify-center space-x-6">
+                        <a href="https://www.linkedin.com/in/pankaj-singh-06446532a/" target="_blank"
+                            class="text-gray-600 hover:text-cyan-600 transition duration-300 text-3xl social-icon">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="https://github.com/pankaj723880" target="_blank"
+                            class="text-gray-600 hover:text-cyan-600 transition duration-300 text-3xl social-icon">
+                            <i class="fab fa-github"></i>
+                        </a>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-blue-900 text-white py-8 px-4 text-center">
+        <div class="container mx-auto">
+            <p>&copy; 2025 Pankaj Kumar Singh. All rights reserved.</p>
+            <div class="mt-4 space-x-4">
+                <a href="#home" class="hover:text-cyan-400 transition duration-300">Home</a>
+                <a href="#portfolio" class="hover:text-cyan-400 transition duration-300">Portfolio</a>
+                <a href="#contact" class="hover:text-cyan-400 transition duration-300">Contact</a>
+            </div>
+        </div>
+    </footer>
+
+    <div id="project-modal" class="fixed inset-0 hidden items-center justify-center modal-overlay p-4">
+        <div class="bg-white rounded-xl shadow-2xl w-full max-w-3xl modal-content relative">
+            <button id="close-modal-btn"
+                class="absolute top-4 right-4 text-gray-500 hover:text-gray-800 text-2xl focus:outline-none">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="p-8">
+                <img id="modal-project-image" src="" alt="Project Image"
+                    class="w-full h-64 object-cover rounded-lg mb-6">
+                <h3 id="modal-project-title" class="text-3xl font-bold mb-4 text-blue-900"></h3>
+                <p id="modal-project-description" class="text-gray-700 leading-relaxed mb-6"></p>
+                <div class="flex flex-col sm:flex-row justify-start space-y-4 sm:space-y-0 sm:space-x-4 mb-6">
+                    <button id="enhance-description-btn" class="btn-ai flex items-center justify-center">
+                        <span id="enhance-desc-spinner" class="hidden spinner mr-2"></span>
+                        Enhance Description ✨
+                    </button>
+                    <button id="generate-headline-btn" class="btn-ai flex items-center justify-center">
+                        <span id="generate-headline-spinner" class="hidden spinner mr-2"></span>
+                        Generate Headline ✨
+                    </button>
+                </div>
+                <p id="enhance-desc-error-message" class="text-red-500 mb-4 hidden"></p>
+                <p id="generated-headline-display" class="text-cyan-700 font-semibold text-lg mb-4 hidden"></p>
+
+
+                <div id="modal-project-details" class="space-y-4 text-gray-700 mb-6">
+                    <p><span class="font-semibold text-blue-800">Role:</span> <span id="modal-project-role"></span></p>
+                    <p><span class="font-semibold text-blue-800">Technologies:</span> <span
+                            id="modal-project-tech"></span>
+                    </p>
+                    <p><span class="font-semibold text-blue-800">Challenges:</span> <span
+                            id="modal-project-challenges"></span></p>
+                    <p><span class="font-semibold text-blue-800">Results:</span> <span
+                            id="modal-project-results"></span>
+                    </p>
+                </div>
+                <div id="modal-project-links" class="flex flex-wrap gap-4">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+      
+        const GOOGLE_API_KEY = "AIzaSyCuR0YjR-BpT1R0VCQZ2U2Tmyj3jJvivPg";
+
+        // Project data: A list of objects, each representing a project with its details.
+        const projects = [
+            {
+                id: 1,
+                title: "Landing page of food delivery platform",
+                image: "foody.png",
+                shortDescription: "A food delivery landing page highlights key services with appealing visuals and CTAs, designed to attract users and encourage orders or sign-ups. a complex analytics dashboard for improved usability and data visualization.",
+                fullDescription: "This Landing Page for a Food Delivery Platform showcases the service's key features like fast delivery, popular meals, and customer reviews. It includes attractive visuals, clear call-to-actions, and a user-friendly layout. Designed to engage visitors and encourage them to place an order or sign up.s project involved a complete overhaul of an existing SaaS analytics dashboard. The primary goal was to enhance user experience, simplify data interpretation, and improve overall efficiency for business users. We conducted extensive user interviews and usability testing to identify pain points and inform design decisions.",
+                role: "Frontend Developer",
+                technologies: "HTML, CSS, Javascript, Bootstrap",
+                challenges: "SiChallenges in making a food delivery landing page include creating a responsive and visually appealing design, optimizing load speed with high-quality images, and ensuring clear navigation. Balancing aesthetics with functionality and effective call-to-actions can also be tricky.mplifying complex data sets, ensuring scalability for future features, maintaining brand consistency.",
+                results: "Achieved a 2The result is a responsive, visually attractive landing page that clearly presents the food delivery platform's services, engages visitors, and encourages them to place orders or sign up.5% reduction in task completion time and a 30% increase in user satisfaction scores. The new design received positive feedback from key stakeholders and early adopters.",
+
+            },
+            {
+                id: 2,
+                title: "Netflix Clone",
+                image: "netflix.png",
+                shortDescription: "Designing a Netflix clone where user can watch movies, series etc.",
+                fullDescription: "A Netflix Clone is a web application that mimics the design and functionality of the original Netflix platform. It allows users to browse and stream movie trailers from various genres using an interactive and responsive UI. The clone features sections like trending shows, popular movies, and user authentication. Built using HTML, CSS, JavaScript, and optionally frameworks like React or Bootstrap, it provides a real-world experience of building a video streaming site.",
+                role: "UX/UI Designer, Prototyper",
+                technologies: "HTML, CSS, Javascript, Bootstrap",
+                challenges: "Challenges in making a Netflix Clone include managing video streaming efficiently, ensuring responsive and user-friendly UI across devices, and handling dynamic data loading for movies. Integrating authentication, local video playback, and maintaining performance with media-heavy content can also be tricky.",
+                results: "The Netflix Clone project results in a responsive, media-rich web app that mimics a real streaming platform, showcasing your frontend and video integration skills for portfolio use.",
+
+            },
+            {
+                id: 3,
+                title: "Online Voting System",
+                image: "voting.png",
+                shortDescription: "The Online Voting System is a Flask-based web app with a database backend that enables secure voter registration, login, and online voting, with real-time result viewing and data management.",
+                fullDescription: "The Online Voting System is a web-based application built using Python and the Flask framework, integrated with a database to securely manage voter data and votes. It allows users to register, log in, and cast their votes online, while the admin can view results and manage data. The system ensures ease of access, secure authentication, and real-time vote counting, making the voting process efficient and transparent.",
+                role: "Backend Developer",
+                technologies: "Python, Flask, MySQL",
+                challenges: "Identifying root caChallenges include implementing secure authentication, preventing multiple voting, managing real-time data updates, and ensuring a user-friendly interface. Integrating the database correctly and handling form validations are also key concerns uses of user frustration, prioritizing recommendations based on impact, presenting complex findings clearly to non-technical stakeholders.",
+                results: "The result is a secure, efficient, and user-friendly online voting system that enables smooth voter participation and accurate real-time result display.",
+
+            },
+            {
+                id: 4,
+                title: "AI Chatbot using OpenRouter API",
+                image: "img2.png",
+                shortDescription: "A responsive AI chatbot built using HTML, CSS, JavaScript, and OpenRouter API for real-time intelligent conversations.",
+                fullDescription: "This project is a web-based AI chatbot developed using HTML, CSS, and JavaScript, powered by OpenRouter API. It enables real-time, human-like conversations by sending user input to the AI model and displaying intelligent responses. The chatbot features a clean, responsive design and can be used as a personal assistant or integrated into portfolios and websites.",
+                role: "Frontend Developer",
+                technologies: "HTML, CSS, JavaScript, OpenRouter API",
+                challenges: "Securing the API key in the frontend, handling asynchronous responses smoothly, and designing a responsive, user-friendly chat interface.",
+                results: "Developed a fully functional AI chatbot capable of real-time conversations, integrated with OpenRouter, and optimized for a smooth user experience on all devices.",
+            },
+        ];
+
+        // Get the 'About Me' text element and store its original content for later use.
+        const aboutMeTextElement = document.getElementById('about-me-text');
+        const originalAboutMeText = aboutMeTextElement.textContent;
+
+        // Get DOM elements for mobile navigation.
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const desktopMenu = document.getElementById('desktop-menu');
+        const navLinks = document.querySelectorAll('nav a'); // All navigation links
+
+        // Event listener to toggle mobile menu visibility.
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Event listeners to hide mobile menu when a navigation link is clicked.
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                if (!mobileMenu.classList.contains('hidden')) {
+                    mobileMenu.classList.add('hidden');
+                }
+            });
+        });
+
+        // Get DOM elements for resume download links.
+        const resumeLink = document.getElementById('resume-link');
+        const mobileResumeLink = document.getElementById('mobile-resume-link');
+
+        // Define the URL for the resume PDF. Replace with your actual resume link.
+        const resumePdfUrl = "https://example.com/your-resume.pdf";
+
+        // Add click event listeners to resume links to open the PDF in a new tab.
+        if (resumeLink) {
+            resumeLink.addEventListener('click', (e) => {
+                e.preventDefault(); // Prevent default link behavior.
+                window.open(resumePdfUrl, '_blank'); // Open PDF in new tab.
+            });
+        }
+        if (mobileResumeLink) {
+            mobileResumeLink.addEventListener('click', (e) => {
+                e.preventDefault(); // Prevent default link behavior.
+                window.open(resumePdfUrl, '_blank'); // Open PDF in new tab.
+            });
+        }
+
+        // Get DOM elements for project modal and its interactive elements.
+        const projectCards = document.querySelectorAll('.project-card');
+        const projectModal = document.getElementById('project-modal');
+        const closeModalBtn = document.getElementById('close-modal-btn');
+        const modalProjectImage = document.getElementById('modal-project-image');
+        const modalProjectTitle = document.getElementById('modal-project-title');
+        const modalProjectDescription = document.getElementById('modal-project-description');
+        const modalProjectRole = document.getElementById('modal-project-role');
+        const modalProjectTech = document.getElementById('modal-project-tech');
+        const modalProjectChallenges = document.getElementById('modal-project-challenges');
+        const modalProjectResults = document.getElementById('modal-project-results');
+        const modalProjectLinks = document.getElementById('modal-project-links');
+        const enhanceDescriptionBtn = document.getElementById('enhance-description-btn');
+        const enhanceDescSpinner = document.getElementById('enhance-desc-spinner');
+        const enhanceDescErrorMessage = document.getElementById('enhance-desc-error-message');
+        const generateHeadlineBtn = document.getElementById('generate-headline-btn');
+        const generateHeadlineSpinner = document.getElementById('generate-headline-spinner');
+        const generatedHeadlineDisplay = document.getElementById('generated-headline-display');
+
+        let currentProject = null; // Variable to hold the data of the project currently displayed in the modal.
+
+        // Add a click event listener to each project card to open the modal and populate it with project details.
+        projectCards.forEach(card => {
+            card.addEventListener('click', () => {
+                const projectId = parseInt(card.dataset.projectId); // Get project ID from data attribute.
+                currentProject = projects.find(p => p.id === projectId); // Find the corresponding project object.
+
+                if (currentProject) {
+                    // Populate the modal's elements with the project data.
+                    modalProjectImage.src = currentProject.image;
+                    modalProjectTitle.textContent = currentProject.title;
+                    modalProjectDescription.textContent = currentProject.fullDescription;
+                    modalProjectRole.textContent = currentProject.role;
+                    modalProjectTech.textContent = currentProject.technologies;
+                    modalProjectChallenges.textContent = currentProject.challenges;
+                    modalProjectResults.textContent = currentProject.results;
+
+                    modalProjectLinks.innerHTML = ''; // Clear any previously displayed links.
+
+                    // If a live link exists, create and append a "View Live" button.
+                    if (currentProject.liveLink) {
+                        const liveLinkBtn = document.createElement('a');
+                        liveLinkBtn.href = currentProject.liveLink;
+                        liveLinkBtn.target = "_blank"; // Open in a new tab.
+                        liveLinkBtn.className = "btn-primary bg-blue-600 text-white px-6 py-2 rounded-full text-md font-semibold shadow-md hover:bg-blue-700 flex items-center";
+                        liveLinkBtn.innerHTML = '<i class="fas fa-external-link-alt mr-2"></i> View Live';
+                        modalProjectLinks.appendChild(liveLinkBtn);
+                    }
+
+                    // If a GitHub link exists, create and append a "GitHub Repo" button.
+                    if (currentProject.githubLink) {
+                        const githubLinkBtn = document.createElement('a');
+                        githubLinkBtn.href = currentProject.githubLink;
+                        githubLinkBtn.target = "_blank"; // Open in a new tab.
+                        githubLinkBtn.className = "btn-primary bg-gray-700 text-white px-6 py-2 rounded-full text-md font-semibold shadow-md hover:bg-gray-800 flex items-center";
+                        githubLinkBtn.innerHTML = '<i class="fab fa-github mr-2"></i> GitHub Repo';
+                        modalProjectLinks.appendChild(githubLinkBtn);
+                    }
+
+                    enhanceDescErrorMessage.classList.add('hidden'); // Hide any previous error messages.
+                    generatedHeadlineDisplay.classList.add('hidden'); // Hide any previously generated headlines.
+                    projectModal.classList.remove('hidden'); // Show the modal.
+                    projectModal.classList.add('flex'); // Use flexbox for centering.
+                    document.body.style.overflow = 'hidden'; // Prevent scrolling of the background content.
+                }
+            });
+        });
+
+        // Event listener to close the project modal.
+        closeModalBtn.addEventListener('click', () => {
+            projectModal.classList.add('hidden'); // Hide the modal.
+            projectModal.classList.remove('flex'); // Remove flexbox display.
+            document.body.style.overflow = ''; // Restore scrolling of the background content.
+        });
+
+        // Event listener to close the project modal when clicking outside the modal content.
+        projectModal.addEventListener('click', (e) => {
+            if (e.target === projectModal) { // Check if the click occurred directly on the overlay.
+                projectModal.classList.add('hidden');
+                projectModal.classList.remove('flex');
+                document.body.style.overflow = '';
+            }
+        });
+
+        // Get DOM elements for the contact form and its success message.
+        const contactForm = document.getElementById('contact-form');
+        const contactSuccessMessage = document.getElementById('contact-success-message');
+
+        // Event listener for contact form submission.
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault(); // Prevent the default form submission (page reload).
+
+          
+
+            contactForm.reset(); // Clear all input fields in the form.
+            contactSuccessMessage.classList.remove('hidden'); // Show the success message.
+
+            // Hide the success message after 5 seconds (5000 milliseconds).
+            setTimeout(() => {
+                contactSuccessMessage.classList.add('hidden');
+            }, 5000);
+        });
+
+        // Get DOM elements for the blog idea generation feature.
+        const generateTextBtn = document.getElementById('generate-text-btn');
+        const textPromptInput = document.getElementById('text-prompt');
+        const generatedTextContainer = document.getElementById('generated-text-container');
+        const generatedText = document.getElementById('generated-text');
+        const textSpinner = document.getElementById('text-spinner');
+        const textErrorMessage = document.getElementById('text-error-message');
+
+        // Event listener to generate a blog idea using the Gemini API.
+        generateTextBtn.addEventListener('click', async () => {
+            const prompt = textPromptInput.value.trim(); // Get the user's prompt and remove leading/trailing whitespace.
+            if (!prompt) {
+                textErrorMessage.textContent = "Please enter a prompt for blog idea generation.";
+                textErrorMessage.classList.remove('hidden');
+                return; // Stop execution if no prompt is provided.
+            }
+
+            textErrorMessage.classList.add('hidden'); // Hide any previous error messages.
+            generatedTextContainer.classList.add('hidden'); // Hide any previously generated text.
+            textSpinner.classList.remove('hidden'); // Show the loading spinner.
+            generateTextBtn.disabled = true; // Disable the button to prevent multiple submissions.
+
+            try {
+                // Prepare the request payload for the Gemini API.
+                let chatHistory = [];
+                chatHistory.push({ role: "user", parts: [{ text: `Generate a short blog post idea (title and a brief paragraph) about web development or UX/UI design related to: ${prompt}` }] });
+                const payload = { contents: chatHistory };
+                const apiKey = GOOGLE_API_KEY; // Your Gemini API key.
+                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+
+                // Send the API request.
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                // Check if the API response was successful.
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    console.error('API Error Response:', errorData);
+                    throw new Error(`HTTP error! status: ${response.status}, message: ${errorData.error?.message || 'Unknown error'}`);
+                }
+
+                const result = await response.json(); // Parse the JSON response.
+
+                // Extract and display the generated text if available.
+                if (result.candidates && result.candidates.length > 0 &&
+                    result.candidates[0].content && result.candidates[0].content.parts &&
+                    result.candidates[0].content.parts.length > 0) {
+                    const text = result.candidates[0].content.parts[0].text;
+                    generatedText.textContent = text;
+                    generatedTextContainer.classList.remove('hidden'); // Show the container with the generated text.
+                } else {
+                    textErrorMessage.textContent = "Failed to generate text. Unexpected API response structure.";
+                    textErrorMessage.classList.remove('hidden');
+                    console.error("Text generation failed: Unexpected response structure", result);
+                }
+            } catch (error) {
+                textErrorMessage.textContent = `An error occurred during text generation: ${error.message}`;
+                textErrorMessage.classList.remove('hidden');
+                console.error("Error generating text:", error);
+            } finally {
+                textSpinner.classList.add('hidden'); // Hide the loading spinner.
+                generateTextBtn.disabled = false; // Re-enable the button.
+            }
+        });
+
+        // Event listener to enhance project description using the Gemini API.
+        enhanceDescriptionBtn.addEventListener('click', async () => {
+            if (!currentProject) return; // Exit if no project is selected.
+
+            enhanceDescErrorMessage.classList.add('hidden'); // Hide previous error messages.
+            enhanceDescSpinner.classList.remove('hidden'); // Show loading spinner.
+            enhanceDescriptionBtn.disabled = true; // Disable current button.
+            generateHeadlineBtn.disabled = true; // Disable other AI buttons during generation.
+
+            try {
+                const prompt = `Enhance and expand the following project description for a professional portfolio website. Make it more detailed and engaging, focusing on the impact and process:
+                        Title: ${currentProject.title}
+                        Short Description: ${currentProject.shortDescription}`;
+
+                let chatHistory = [];
+                chatHistory.push({ role: "user", parts: [{ text: prompt }] });
+                const payload = { contents: chatHistory };
+                const apiKey = GOOGLE_API_KEY;
+                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    console.error('API Error Response:', errorData);
+                    throw new Error(`HTTP error! status: ${response.status}, message: ${errorData.error?.message || 'Unknown error'}`);
+                }
+
+                const result = await response.json();
+
+                if (result.candidates && result.candidates.length > 0 &&
+                    result.candidates[0].content && result.candidates[0].content.parts &&
+                    result.candidates[0].content.parts.length > 0) {
+                    const enhancedText = result.candidates[0].content.parts[0].text;
+                    modalProjectDescription.textContent = enhancedText; // Update the project description in the modal.
+                } else {
+                    enhanceDescErrorMessage.textContent = "Failed to enhance description. Unexpected API response structure.";
+                    enhanceDescErrorMessage.classList.remove('hidden');
+                    console.error("Description enhancement failed: Unexpected response structure", result);
+                }
+            } catch (error) {
+                enhanceDescErrorMessage.textContent = `An error occurred during description enhancement: ${error.message}`;
+                enhanceDescErrorMessage.classList.remove('hidden');
+                console.error("Error enhancing description:", error);
+            } finally {
+                enhanceDescSpinner.classList.add('hidden'); // Hide loading spinner.
+                enhanceDescriptionBtn.disabled = false; // Re-enable current button.
+                generateHeadlineBtn.disabled = false; // Re-enable other AI button.
+            }
+        });
+
+        // Event listener to generate a project headline using the Gemini API.
+        generateHeadlineBtn.addEventListener('click', async () => {
+            if (!currentProject) return; // Exit if no project is selected.
+
+            enhanceDescErrorMessage.classList.add('hidden'); // Hide previous error messages.
+            generatedHeadlineDisplay.classList.add('hidden'); // Hide previous generated headline.
+            generateHeadlineSpinner.classList.remove('hidden'); // Show loading spinner.
+            generateHeadlineBtn.disabled = true; // Disable current button.
+            enhanceDescriptionBtn.disabled = true; // Disable other AI button during generation.
+
+            try {
+                const prompt = `Generate a short, impactful, and professional headline (max 10 words) for a portfolio project based on this title and short description:
+                        Title: ${currentProject.title}
+                        Short Description: ${currentProject.shortDescription}`;
+
+                let chatHistory = [];
+                chatHistory.push({ role: "user", parts: [{ text: prompt }] });
+                const payload = { contents: chatHistory };
+                const apiKey = GOOGLE_API_KEY;
+                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    console.error('API Error Response:', errorData);
+                    throw new Error(`HTTP error! status: ${response.status}, message: ${errorData.error?.message || 'Unknown error'}`);
+                }
+
+                const result = await response.json();
+
+                if (result.candidates && result.candidates.length > 0 &&
+                    result.candidates[0].content && result.candidates[0].content.parts &&
+                    result.candidates[0].content.parts.length > 0) {
+                    const generatedHeadline = result.candidates[0].content.parts[0].text;
+                    generatedHeadlineDisplay.textContent = `Suggested Headline: "${generatedHeadline.replace(/"/g, '')}"`; // Display headline, removing extra quotes.
+                    generatedHeadlineDisplay.classList.remove('hidden'); // Show the headline display.
+                } else {
+                    enhanceDescErrorMessage.textContent = "Failed to generate headline. Unexpected API response structure.";
+                    enhanceDescErrorMessage.classList.remove('hidden');
+                    console.error("Headline generation failed: Unexpected response structure", result);
+                }
+            } catch (error) {
+                enhanceDescErrorMessage.textContent = `An error occurred during headline generation: ${error.message}`;
+                enhanceDescErrorMessage.classList.remove('hidden');
+                console.error("Error generating headline:", error);
+            } finally {
+                generateHeadlineSpinner.classList.add('hidden'); // Hide loading spinner.
+                generateHeadlineBtn.disabled = false; // Re-enable current button.
+                enhanceDescriptionBtn.disabled = false; // Re-enable other AI button.
+            }
+        });
+
+
+        // Get DOM elements for the "About Me" section's expand/summarize buttons.
+        const expandAboutMeBtn = document.getElementById('expand-about-me-btn');
+        const summarizeAboutMeBtn = document.getElementById('summarize-about-me-btn');
+        const expandAboutSpinner = document.getElementById('expand-about-spinner');
+        const summarizeAboutSpinner = document.getElementById('summarize-about-spinner');
+        const aboutMeErrorMessage = document.getElementById('about-me-error-message');
+
+        // Event listener to expand the "About Me" text using the Gemini API.
+        expandAboutMeBtn.addEventListener('click', async () => {
+            aboutMeErrorMessage.classList.add('hidden'); // Hide previous error messages.
+            expandAboutSpinner.classList.remove('hidden'); // Show loading spinner.
+            expandAboutMeBtn.disabled = true; // Disable both buttons during generation.
+            summarizeAboutMeBtn.disabled = true;
+
+            try {
+                const currentText = aboutMeTextElement.textContent; // Get the current text content.
+                const prompt = `Expand the following "About Me" section for a professional portfolio website. Make it more detailed and engaging, adding more depth to the professional journey, passions, and unique perspective. Keep the tone professional yet personal.
+                        Current text: ${currentText}`;
+
+                let chatHistory = [];
+                chatHistory.push({ role: "user", parts: [{ text: prompt }] });
+                const payload = { contents: chatHistory };
+                const apiKey = GOOGLE_API_KEY;
+                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    console.error('API Error Response:', errorData);
+                    throw new Error(`HTTP error! status: ${response.status}, message: ${errorData.error?.message || 'Unknown error'}`);
+                }
+
+                const result = await response.json();
+
+                if (result.candidates && result.candidates.length > 0 &&
+                    result.candidates[0].content && result.candidates[0].content.parts &&
+                    result.candidates[0].content.parts.length > 0) {
+                    const expandedText = result.candidates[0].content.parts[0].text;
+                    aboutMeTextElement.textContent = expandedText; // Update the "About Me" section with expanded text.
+                } else {
+                    aboutMeErrorMessage.textContent = "Failed to expand 'About Me' section. Unexpected API response structure.";
+                    aboutMeErrorMessage.classList.remove('hidden');
+                    console.error("About Me expansion failed: Unexpected response structure", result);
+                }
+            } catch (error) {
+                aboutMeErrorMessage.textContent = `An error occurred during 'About Me' expansion: ${error.message}`;
+                aboutMeErrorMessage.classList.remove('hidden');
+                console.error("Error expanding About Me:", error);
+            } finally {
+                expandAboutSpinner.classList.add('hidden'); // Hide loading spinner.
+                expandAboutMeBtn.disabled = false; // Re-enable buttons.
+                summarizeAboutMeBtn.disabled = false;
+            }
+        });
+
+        // Event listener to summarize the "About Me" text using the Gemini API.
+        summarizeAboutMeBtn.addEventListener('click', async () => {
+            aboutMeErrorMessage.classList.add('hidden'); // Hide previous error messages.
+            summarizeAboutSpinner.classList.remove('hidden'); // Show loading spinner.
+            expandAboutMeBtn.disabled = true; // Disable both buttons during generation.
+            summarizeAboutMeBtn.disabled = true;
+
+            try {
+                const currentText = aboutMeTextElement.textContent; // Get the current text content.
+                const prompt = `Summarize the following "About Me" section for a professional portfolio website. Make it concise and to the point, highlighting key professional aspects.
+                        Current text: ${currentText}`;
+
+                let chatHistory = [];
+                chatHistory.push({ role: "user", parts: [{ text: prompt }] });
+                const payload = { contents: chatHistory };
+                const apiKey = GOOGLE_API_KEY;
+                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    console.error('API Error Response:', errorData);
+                    throw new Error(`HTTP error! status: ${response.status}, message: ${errorData.error?.message || 'Unknown error'}`);
+                }
+
+                const result = await response.json();
+
+                if (result.candidates && result.candidates.length > 0 &&
+                    result.candidates[0].content && result.candidates[0].content.parts &&
+                    result.candidates[0].content.parts.length > 0) {
+                    const summarizedText = result.candidates[0].content.parts[0].text;
+                    aboutMeTextElement.textContent = summarizedText; // Update the "About Me" section with summarized text.
+                } else {
+                    aboutMeErrorMessage.textContent = "Failed to summarize 'About Me' section. Unexpected API response structure.";
+                    aboutMeErrorMessage.classList.remove('hidden');
+                    console.error("About Me summarization failed: Unexpected response structure", result);
+                }
+            } catch (error) {
+                aboutMeErrorMessage.textContent = `An error occurred during 'About Me' summarization: ${error.message}`;
+                aboutMeErrorMessage.classList.remove('hidden');
+                console.error("Error summarizing About Me:", error);
+            } finally {
+                summarizeAboutSpinner.classList.add('hidden'); // Hide loading spinner.
+                expandAboutMeBtn.disabled = false; // Re-enable buttons.
+                summarizeAboutMeBtn.disabled = false;
+            }
+        });
+
+
+        // Get all buttons for generating skill descriptions.
+        const generateSkillDescBtns = document.querySelectorAll('.generate-skill-desc-btn');
+
+        // Add a click event listener to each skill description generation button.
+        generateSkillDescBtns.forEach(button => {
+            button.addEventListener('click', async (event) => {
+                const skillName = event.currentTarget.dataset.skill; // Get the skill name from the button's data attribute.
+                const skillContainer = event.currentTarget.closest('.flex.items-center'); // Get the parent container.
+                const skillDescriptionElement = skillContainer.nextElementSibling; // Get the <p> tag for the description.
+                const skillSpinner = document.createElement('span'); // Create a new spinner element.
+                skillSpinner.className = 'spinner ml-2';
+                event.currentTarget.appendChild(skillSpinner); // Append the spinner next to the button.
+                event.currentTarget.disabled = true; // Disable the button during generation.
+
+                skillDescriptionElement.classList.add('hidden'); // Hide any previous description.
+                skillDescriptionElement.textContent = ''; // Clear any previous text.
+
+                try {
+                    const prompt = `Provide a concise, professional explanation of why "${skillName}" is an important skill for a web developer, in one to two sentences.`;
+
+                    let chatHistory = [];
+                    chatHistory.push({ role: "user", parts: [{ text: prompt }] });
+                    const payload = { contents: chatHistory };
+                    const apiKey = GOOGLE_API_KEY;
+                    const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+
+                    const response = await fetch(apiUrl, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+
+                    if (!response.ok) {
+                        const errorData = await response.json();
+                        console.error('API Error Response:', errorData);
+                        throw new Error(`HTTP error! status: ${response.status}, message: ${errorData.error?.message || 'Unknown error'}`);
+                    }
+
+                    const result = await response.json();
+
+                    if (result.candidates && result.candidates.length > 0 &&
+                        result.candidates[0].content && result.candidates[0].content.parts &&
+                        result.candidates[0].content.parts.length > 0) {
+                        const description = result.candidates[0].content.parts[0].text;
+                        skillDescriptionElement.textContent = description; // Update the skill description.
+                        skillDescriptionElement.classList.remove('hidden'); // Show the description.
+                    } else {
+                        skillDescriptionElement.textContent = "Failed to generate description. Unexpected API response structure.";
+                        skillDescriptionElement.classList.remove('hidden');
+                        console.error(`Skill description generation failed for ${skillName}: Unexpected response structure`, result);
+                    }
+                } catch (error) {
+                    skillDescriptionElement.textContent = `Error generating description: ${error.message}`;
+                    skillDescriptionElement.classList.remove('hidden');
+                    console.error(`Error generating skill description for ${skillName}:`, error);
+                } finally {
+                    skillSpinner.remove(); // Remove the spinner from the DOM.
+                    event.currentTarget.disabled = false; // Re-enable the button.
+                }
+            });
+        });
+
+        // Get all buttons for generating service descriptions.
+        const generateServiceDescBtns = document.querySelectorAll('.generate-service-desc-btn');
+
+        // Add a click event listener to each service description generation button.
+        generateServiceDescBtns.forEach(button => {
+            button.addEventListener('click', async (event) => {
+                const serviceCard = event.currentTarget.closest('.service-card'); // Get the parent service card.
+                const serviceTitle = serviceCard.querySelector('h3').textContent; // Get the service title.
+                const serviceDescriptionTextElement = serviceCard.querySelector('.service-description-text'); // Get the <p> tag for the description.
+                const serviceDescErrorElement = serviceCard.querySelector('.service-desc-error'); // Get the error message element.
+                const serviceSpinner = event.currentTarget.querySelector('.spinner'); // Get the spinner element within the button.
+
+                serviceDescErrorElement.classList.add('hidden'); // Hide any previous error messages.
+                serviceSpinner.classList.remove('hidden'); // Show the loading spinner.
+                event.currentTarget.disabled = true; // Disable the button during generation.
+
+                try {
+                    const prompt = `Generate a detailed, professional, and engaging description for a portfolio service titled "${serviceTitle}". Focus on the value provided to clients. Keep it concise, around 3-4 sentences.`;
+
+                    let chatHistory = [];
+                    chatHistory.push({ role: "user", parts: [{ text: prompt }] });
+                    const payload = { contents: chatHistory };
+                    const apiKey = GOOGLE_API_KEY;
+                    const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+
+                    const response = await fetch(apiUrl, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+
+                    if (!response.ok) {
+                        const errorData = await response.json();
+                        console.error('API Error Response:', errorData);
+                        throw new Error(`HTTP error! status: ${response.status}, message: ${errorData.error?.message || 'Unknown error'}`);
+                    }
+
+                    const result = await response.json();
+
+                    if (result.candidates && result.candidates.length > 0 &&
+                        result.candidates[0].content && result.candidates[0].content.parts &&
+                        result.candidates[0].content.parts.length > 0) {
+                        const generatedDescription = result.candidates[0].content.parts[0].text;
+                        serviceDescriptionTextElement.textContent = generatedDescription; // Update the service description.
+                    } else {
+                        serviceDescErrorElement.textContent = "Failed to generate description. Unexpected API response structure.";
+                        serviceDescErrorElement.classList.remove('hidden');
+                        console.error(`Service description generation failed for ${serviceTitle}: Unexpected response structure`, result);
+                    }
+                } catch (error) {
+                    serviceDescErrorElement.textContent = `Error generating description: ${error.message}`;
+                    serviceDescErrorElement.classList.remove('hidden');
+                    console.error(`Error generating service description for ${serviceTitle}:`, error);
+                } finally {
+                    serviceSpinner.classList.add('hidden'); // Hide loading spinner.
+                    event.currentTarget.disabled = false; // Re-enable the button.
+                }
+            });
+        });
+
+        // Get DOM elements for the testimonial generation feature.
+        const generateTestimonialBtn = document.getElementById('generate-testimonial-btn');
+        const testimonialPromptInput = document.getElementById('testimonial-prompt');
+        const testimonialAuthorInput = document.getElementById('testimonial-author');
+        const testimonialSpinner = document.getElementById('testimonial-spinner');
+        const testimonialErrorMessage = document.getElementById('testimonial-error-message');
+        const generatedTestimonialContainer = document.getElementById('generated-testimonial-container');
+        const generatedTestimonialText = document.getElementById('generated-testimonial-text');
+        const generatedTestimonialAuthor = document.getElementById('generated-testimonial-author');
+        const testimonialsGrid = document.getElementById('testimonials-grid'); // The grid where testimonials are displayed.
+
+        // Event listener to generate a testimonial using the Gemini API.
+        generateTestimonialBtn.addEventListener('click', async () => {
+            const feedbackSummary = testimonialPromptInput.value.trim(); // Get user feedback summary.
+            const authorInfo = testimonialAuthorInput.value.trim(); // Get author information.
+
+            if (!feedbackSummary) {
+                testimonialErrorMessage.textContent = "Please provide a summary of the feedback.";
+                testimonialErrorMessage.classList.remove('hidden');
+                return; // Stop execution if no feedback is provided.
+            }
+
+            testimonialErrorMessage.classList.add('hidden'); // Hide previous error messages.
+            generatedTestimonialContainer.classList.add('hidden'); // Hide previous generated testimonial.
+            testimonialSpinner.classList.remove('hidden'); // Show loading spinner.
+            generateTestimonialBtn.disabled = true; // Disable the button during generation.
+
+            try {
+                const prompt = `Generate a professional client testimonial for a web developer based on this feedback: "${feedbackSummary}". If provided, include the author as "${authorInfo}". Make it sound authentic and positive, around 3-5 sentences.`;
+
+                let chatHistory = [];
+                chatHistory.push({ role: "user", parts: [{ text: prompt }] });
+                const payload = { contents: chatHistory };
+                const apiKey = GOOGLE_API_KEY;
+                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    console.error('API Error Response:', errorData);
+                    throw new Error(`HTTP error! status: ${response.status}, message: ${errorData.error?.message || 'Unknown error'}`);
+                }
+
+                const result = await response.json();
+
+                if (result.candidates && result.candidates.length > 0 &&
+                    result.candidates[0].content && result.candidates[0].content.parts &&
+                    result.candidates[0].content.parts.length > 0) {
+                    const generatedTestimonial = result.candidates[0].content.parts[0].text;
+
+                    let testimonialText = generatedTestimonial;
+                    let testimonialAuthor = authorInfo || "Anonymous Client"; // Default to "Anonymous Client" if no author is provided.
+
+                    // Attempt to parse author from the generated text if the user didn't provide one.
+                    const authorMatch = generatedTestimonial.match(/-(.+), (.+)/);
+                    if (authorMatch && authorInfo === "") {
+                        testimonialText = generatedTestimonial.substring(0, authorMatch.index).trim();
+                        testimonialAuthor = authorMatch[1].trim() + ", " + authorMatch[2].trim();
+                    } else if (authorInfo !== "") {
+                        testimonialAuthor = authorInfo; // Prioritize user-provided author info.
+                    } else {
+                        testimonialAuthor = "Anonymous Client"; // Fallback.
+                    }
+
+                    generatedTestimonialText.textContent = testimonialText.replace(/"/g, ''); // Display the testimonial text, removing any extra quotes.
+                    generatedTestimonialAuthor.textContent = `- ${testimonialAuthor}`; // Display the author.
+                    generatedTestimonialContainer.classList.remove('hidden'); // Show the container with the generated testimonial.
+
+                    // Create a new testimonial card and prepend it to the testimonials grid.
+                    const newTestimonialCard = document.createElement('div');
+                    newTestimonialCard.className = "bg-white p-6 rounded-lg shadow-md border-t-4 border-orange-500";
+                    newTestimonialCard.innerHTML = `
+                                <p class="text-gray-700 italic mb-4">"${testimonialText.replace(/"/g, '')}"</p>
+                                <p class="font-semibold text-blue-800">- ${testimonialAuthor}</p>
+                            `;
+                    testimonialsGrid.prepend(newTestimonialCard); // Add to the beginning of the grid.
+
+                    testimonialPromptInput.value = ''; // Clear the feedback input.
+                    testimonialAuthorInput.value = ''; // Clear the author input.
+
+                } else {
+                    testimonialErrorMessage.textContent = "Failed to generate testimonial. Unexpected API response structure.";
+                    testimonialErrorMessage.classList.remove('hidden');
+                    console.error("Testimonial generation failed: Unexpected response structure", result);
+                }
+            } catch (error) {
+                testimonialErrorMessage.textContent = `An error occurred during testimonial generation: ${error.message}`;
+                testimonialErrorMessage.classList.remove('hidden');
+                console.error("Error generating testimonial:", error);
+            } finally {
+                testimonialSpinner.classList.add('hidden'); // Hide loading spinner.
+                generateTestimonialBtn.disabled = false; // Re-enable the button.
+            }
+        });
+
+        // Add smooth scrolling behavior to all internal anchor links.
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault(); // Prevent default jump behavior.
+
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth' // Enable smooth scrolling.
+                });
+            });
+        });
+
+        // Basic conceptual "404" handling for single-page applications.
+        // If a hash in the URL doesn't correspond to an existing section ID, log a warning.
+        window.addEventListener('hashchange', () => {
+            const hash = window.location.hash;
+            if (hash && !document.querySelector(hash)) {
+                console.warn(`Section for hash "${hash}" not found.`);
+                // In a real application, you might redirect to a 404 page or display a specific error message.
+            }
+        });
+    </script>
+</body>
+
+</html>
